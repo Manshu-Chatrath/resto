@@ -1,1 +1,1 @@
-# resto
+So this is my main restaurant website where a user can book the table, order the items for curbside and can add the items into the cart after loging in. This restaurant site will be controlled by the inventory.
