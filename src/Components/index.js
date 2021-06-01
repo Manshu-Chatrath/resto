@@ -1,9 +1,13 @@
 import React from 'react';
 import Nav from './Nav';
 import Footer from './Footer';
+import {Link} from 'react-router-dom';
 class Main extends React.Component
 {
-
+    today=()=>{
+        const today = new Date().toISOString().slice(0, 10)
+      return today;
+      }
 render()
 {
     return(<>
@@ -50,12 +54,14 @@ render()
             <option value="3">6 People</option>
 
           </select>
-        <input type="date" id="date" className="form-control"  placeholder="Date" />
-        <input type="time" id="time" className="form-control" value="00:00"/>
+        <input type="date" id="date" min={this.today()} defaultValue={this.today()} className="form-control"  placeholder="Date" />
+        <input type="time" id="time" className="form-control" defaultValue="00:00"/>
     </div>
     <div className="table"></div>
     <div className="reservation">
-        <button type="button" className="btn btn-danger" id="reservation">Book Your Reservation</button>
+       <Link to='/book'>
+       <button type="button" className="btn btn-danger" id="reservation">Book Your Reservation</button>
+       </Link> 
     </div>
     <div className="choice mt-4">
       <img id="diner" src="https://refectory.com/wp-content/uploads/2020/02/design_image_opentable_dc2020-badge-mark-only-2x_121719-1-600x600.png" alt=""/>
@@ -79,7 +85,7 @@ render()
 <div className="section3">
     <div className="real-about">
         <div className="about">
-            <div className="a">
+            <div id="aboutus" className="a">
                 <h1>About Us</h1>
                 <p>We believe that good food and a drink or two can bring people of all lifestyles together.</p>
                 <p>Serving the kind of classic pub grub that everybody can enjoy, 

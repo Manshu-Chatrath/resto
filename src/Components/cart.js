@@ -1,10 +1,156 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import Footer from './Footer';
-import Nav from './Nav'
-class Cart extends React.Component
+import Nav from './Nav';
+import {connect} from 'react-redux';
+import {addcart,allcartitems,realextras,totalcart,deleting,checkout} from '../action/action';
+import { Elements } from "@stripe/react-stripe-js"
+import { loadStripe } from "@stripe/stripe-js"
+import Checkout from './checkout';
+const public_key= "pk_test_51HvZrNHtX5JzPZUWepneAgxsxR6F5Yt7qLLU8HbleQYAb4ov91OI5J7aWkM0n9oYbDJ53u2f8yG33hUaSjKuusIr00E1PdBFly";
+const stripTestPromise=loadStripe(public_key);
+let dish33=[];
+const Cart=(props)=>{
+    useEffect(()=>{
+        props.allcartitems();
+        props.realextras();  
+    },[])
+//const [price,setprice]=useState(0);
+const [id,setid]=useState('')
+
+function totalprice(){
+    let sum=0;
+   props.cartItems.map(item=>{
+        sum+=item.price;
+    })
+   props.extras.map(item=>{
+        sum+=item.price;
+    });
+    return sum.toFixed(2);
+}
+/*handleSubmit = ()=>async (e) => {
+    e.preventDefault();
+}*/
+
+function checkout(){
+    return(
+        <Elements stripe={stripTestPromise}>
+                 <Checkout dish33={dish33} price={totalprice()} />
+        </Elements>
+    )
+}
+
+    function delete33(){ 
+    return(<div className="hide delete-tab">
+    <div className="tab">
+      <div className="text">
+       <h1>Delete Dish?</h1>
+       <p>Do you want to delete this dish?</p>
+       <div className="btnns">
+           <button  className="delete2" onClick={()=>props.deleting(id)}>Delete</button><button className="delete2" onClick={()=>{let delete2=document.querySelector('.delete-tab');  delete2.classList.add('hide');
+        document.querySelector('body').style.overflow='visible';}}>Cancel</button>
+       </div>
+      </div>
+    </div>
+  </div>)
+}
+function wait()
 {
-    render()
+    setTimeout(() => {
+        let warning=document.querySelector('.wait');
+        if(document.querySelector('.loader'))
+        {  
+                let loader=document.querySelector('.loader');
+                loader.classList.add('hide');
+                warning.innerHTML=`<h4>No items in the cart.</h4>`
+        }
+      }, 5000);
+}
+function load()
+{
+    if(props.cartItems.length<1)
     {
+        return(<div className="wait mb-2 text-center">                                                        
+        <div className="loader"></div>
+    </div>)
+    }
+    else
+    {   console.log("Its more than 1");
+        return allcartitems();
+    }
+}
+function open(id){
+    console.log(dish33);
+    let delete2=document.querySelector('.delete-tab');
+    delete2.classList.remove('hide');
+    document.querySelector('body').style.overflow="hidden";
+     setid(id)
+    window.addEventListener('click',function(e){
+       if(e.target.className==='delete-tab')
+       {
+        delete2.classList.add('hide');
+        document.querySelector('body').style.overflow='visible';
+       }
+    })
+}
+function including(id,price,title){
+let extra=props.extras.filter(item=>item.real_id===id)
+let str='';
+let sum=0;
+for(let i=0;i<extra.length;i++)
+{
+    str+=extra[i].title+' | ';
+    sum+=extra[i].price;
+}
+console.log(str);
+let tot=sum+price;
+dish33.push({title: title,extras: str,price: tot.toFixed(2)})
+return(<>
+        <div>Price: $<span className="total-price">{tot.toFixed(2)}</span></div>
+        <div className="exxtras">
+        {str.length>0 ? <div>Extras: {str}</div> : <div>Extras: No Extras Added</div>}
+        </div>
+        </>
+    )
+}
+function allcartitems(){
+    console.log("It has to work ")
+        return props.total.map(item=>{
+            return(
+                props.cartItems.map(dish=>{
+                   if(item.dishes_id===dish.id)
+                   {  
+                        return(<article className="cart_items">
+                        <img src={dish.url} alt="" className="image1777"/>
+                        <div className="details">
+                        <div>Title: {dish.title}</div>
+                            {including(item.id,dish.price,dish.title)}     
+                         </div>
+                            <input type="hidden" name="productId" />
+                            <button className="delete" onClick={()=>{open(item.id)}}>X</button> 
+                        </article>)
+                   }     
+                })
+             
+            )
+        })
+    
+}
+
+function open2(){
+let delete2=document.querySelector('#checkout');
+delete2.classList.remove('hid');
+dish33.splice(props.total.length,dish33.length);
+console.log(dish33);
+document.querySelector('body').style.overflow="hidden";
+window.addEventListener('click',function(e){
+   if(e.target.id==='checkout')
+   {
+    delete2.classList.add('hid');
+    document.querySelector('body').style.overflow='visible';
+   }
+})
+}
+
         return(<>
             <div className="over"></div>
             <div id="real-reservation">
@@ -17,39 +163,29 @@ class Cart extends React.Component
                 </div>
             </div>
             <div>
-                <h2>Your cart items:</h2><hr/>
+                <h2>Your cart items:</h2> <hr style={{borderTop: '1px solid black'}} />
             <section className="cart1">
-            <article className="cart_items">
-            <img src='https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1920,format=auto,quality=50/https://cdn.doordash.com/media/photos/93db5897-ef23-4133-8b72-092d021a7100-retina-large-jpeg' alt="" className="image1777"/>
-            <div className="details">
-            <div>Title:  </div>
-             <div>Price: $</div>
-             <div className="quantity">
-             <div>Quantity: </div>
-            </div>
-            <div className="exxtras">
-                <div>Extras: </div>
-            </div>
-            </div>
-            <form action="/delete-cart" method="POST">
-                <input type="hidden" name="productId" />
-                <button className="delete">X</button> 
-            </form>
-            </article>
+            {load()}
             </section>
-            <hr/>
-            <h2>In order to purchase these items click on order</h2>
+            <hr style={{borderTop: '1px solid black'}} />
+            <h2>Click below to checkout from the cart</h2>
             <div className="container00">
-            <form action="/order">
-                <input type="hidden" name="buyerId" value="<%=buyerId%>"/>
-                <button className="order">Order</button>
-            </form>
+                <button className="order" onClick={()=>{if(props.total.length>0){open2(); document.querySelector('.warning').classList.add('hid')}else{document.querySelector('.warning').classList.remove('hid')} }}>Checkout</button>
+            
             </div>
             <hr/>
             </div>
+               { delete33()}
+               {checkout()}
+               {wait()}
+               <strong><div className="warning text-center hid text-danger">Please add some items into the cart </div></strong><br/>
             <Footer />
             </>
         )
-    }
+    
 }
-export default Cart;
+const mapStateProps=(state)=>{
+    console.log(state);
+return {cartItems: state.allcartitems,extras: state.everything,total: state.totalcart}
+}
+export default connect(mapStateProps,{addcart,allcartitems,realextras,totalcart,deleting,checkout})(Cart);

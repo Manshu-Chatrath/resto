@@ -26,6 +26,11 @@
     width: 100%;
     cursor: pointer;
 }
+.logout
+{
+    margin-top: 20px;
+    color: aqua;
+}
 #image
 {
    width: 100%;

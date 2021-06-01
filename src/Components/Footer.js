@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 class Footer extends React.Component{
     render()
     {
@@ -16,8 +17,9 @@ class Footer extends React.Component{
   
    
          <img id="img3" src="https://bowheadpub.com/wp-content/uploads/2019/10/Bowhead-03.png" alt=""/>
-          <p>Bowhead is a community and space where non-meat eaters and 
-        the most hardcore meat-eaters can mingle and enjoy all that a conventional pub has to offer.</p>
+          <p>This project has been made for educational and training purposes. As design, images, logos and names are taken from 
+          https://bowheadpub.com/ and belongs to them only.
+          </p>
   
         </div>
   
@@ -32,23 +34,23 @@ class Footer extends React.Component{
   
           <ul className="list-unstyled">
             <li>
-              <a className="text-white" href="#!">Our Story</a>
+              <Link className="text-white" to="/">Our Story</Link>
             </li>
             <li>
-              <a className="text-white" href="#!">Menu</a>
+              <Link className="text-white" to="/menu">Menu</Link>
             </li>
             <li>
-              <a className="text-white" href="#!">About Us</a>
+              <Link className="text-white" to="/">About Us</Link>
             </li>
             <li>
-              <a className="text-white" href="#!">Reservation</a>
+              <Link to='/book' className="text-white" >Reservation</Link>
             </li>
           </ul>
   
         </div>
   
 
-        <div className="col-md-3 mb-md-0 mb-3">
+        <div id='contact' className="col-md-3 mb-md-0 mb-3">
   
  
           <h5 className="text-uppercase">Get in Touch</h5>
@@ -64,14 +66,14 @@ class Footer extends React.Component{
               Address: 1925 Rue Dufresne, Montreal, Quebec, H2K 3K4 
             </li>
             <li className="mt-1">
-             <button  id="reservation2">Book A Reservation</button>
+             <Link to='/book'><button  id="reservation2">Book A Reservation</button></Link>
             </li>
           </ul>
         </div>
       </div>
     </div>
-    <div className="footer-copyright text-center py-3">© 2020 Copyright:
-      <a href="https://mdbootstrap.com/" className="text-white"> MDBootstrap.com</a>
+    <div className="footer-copyright text-center py-3">© The images, designs and logos belongs to 
+      <a href="https://bowheadpub.com/" className="text-white"> BowheadPub.com</a>
     </div>
 
   </footer>

@@ -124,7 +124,7 @@ background-color: white;
     background-color: white;
     position: absolute;
     z-index: 5;
-    left: 10px;
+    right: 10px;
     top: 9px;
     text-align: center;
     font-size: 11px;
@@ -377,7 +377,11 @@ ul li a
     } 
 }
 @media(max-width: 750px)
-{#main
+{   .circle
+    {
+        left: 25px;
+    }
+    #main
     {
         background-color: rgba(0, 0, 0, 0.377);
     }
@@ -451,7 +455,7 @@ ul li a
 @media(max-width: 482px)
 {#diner
     {
-        width: 30vw;
+       display: none
     }
     .inputss
     {

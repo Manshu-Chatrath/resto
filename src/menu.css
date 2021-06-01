@@ -116,7 +116,6 @@ width: 100%;
     border-radius: 25px;
     transition: all .3s;
     cursor: pointer;
-    width: 45%;
 }
 .pic
 {
@@ -336,4 +335,9 @@ button:focus {outline: none}
     {
         font-size: .7rem;
     }
+}
+.item-price
+{
+    font-size: 1.2rem;
+    font-weight: bold;
 }
