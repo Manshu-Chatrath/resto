@@ -124,6 +124,11 @@ class Menu extends React.Component {
       );
       extra.classList.add("hide");
       document.getElementById("cartt").disabled = false;
+      this.setState({
+        extras: [],
+        dishId: "",
+        quantity: 1,
+      });
     } else {
       window.location.href = "https://resto2.herokuapp.com/signup";
     }
