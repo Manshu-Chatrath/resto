@@ -1,0 +1,80 @@
+.window {
+  background: url("https://previews.123rf.com/images/karandaev/karandaev1604/karandaev160400628/55955490-herbs-condiments-and-spices-on-wooden-background-top-view-with-copy-space.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  padding-top: 10%;
+  background-position: bottom center;
+}
+.heading-inventory {
+  text-align: center;
+}
+#container {
+  background-color: rgb(237, 247, 240);
+}
+#register {
+  height: 30px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  cursor: pointer;
+}
+.logout {
+  margin-top: 20px;
+  color: aqua;
+}
+#image {
+  width: 100%;
+  margin-top: 6%;
+}
+.nothing {
+  text-align: center;
+}
+body {
+  margin: 0;
+}
+
+#container44 {
+  background-color: aliceblue;
+}
+
+#row1 {
+  height: 10%;
+  padding-top: 5%;
+}
+.heading-inventory {
+  text-align: center;
+}
+#login,
+#signup {
+  height: 30px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  cursor: pointer;
+}
+
+#links {
+  margin-bottom: 20px;
+}
+#columns {
+  text-align: center;
+}
+
+.rowdsd {
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 344px) {
+  .rowdsd {
+    flex-direction: column;
+  }
+  .extra {
+    display: flex;
+    justify-content: space-around;
+  }
+}
