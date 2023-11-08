@@ -15,7 +15,12 @@ import { connect } from "react-redux";
 class Menu extends React.Component {
   constructor() {
     super();
-    this.state = { quantity: 1, extras: [], name2: "", dishId: "" };
+    this.state = {
+      quantity: 1,
+      extras: [],
+      name2: "",
+      dishId: "",
+    };
   }
   componentDidMount() {
     this.props.menu();
@@ -84,10 +89,9 @@ class Menu extends React.Component {
       quantity.innerHTML = this.state.quantity;
       dis.innerHTML = title;
       document.querySelector("body").style.overflow = "hidden";
-      window.addEventListener("click", function (e) {
+      window.addEventListener("click", (e) => {
         if (e.target.className === "extra2") {
           extra.classList.add("hide");
-
           document.querySelector("body").style.overflow = "visible";
         }
       });
@@ -119,6 +123,7 @@ class Menu extends React.Component {
         this.state.quantity
       );
       extra.classList.add("hide");
+      document.getElementById("cartt").disabled = false;
     } else {
       window.location.href = "https://resto2.herokuapp.com/signup";
     }
