@@ -215,7 +215,7 @@ class Menu extends React.Component {
   };
   main = (title) => {
     return this.props.menus.map((item) => {
-      if (title === item.Category)
+      if (title === item.Category && item.active === "true")
         return (
           <div key={item.id} className="article">
             <div className="title">

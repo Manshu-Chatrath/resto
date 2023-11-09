@@ -42,8 +42,8 @@ class Signup extends React.Component {
       <div className="row pt-3">
         <div className="col-12">
           <div className="font-weight-bold text-uppercase text-center text-danger">
-            {this.props.signUp.msg
-              ? this.props.signUp.msg
+            {this.props.signUp?.error.msg
+              ? this.props.signUp.error.msg
               : this.props.signUp.message}
           </div>
         </div>
